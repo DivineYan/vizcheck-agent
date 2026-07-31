@@ -112,6 +112,14 @@
 - **单测**：manifest 去重逻辑（复刻公司项目 log-triage 测试套里"合成 fixture 驱动测试"的风格）、diff 判断的阈值边界情况。
 - **集成测试**：准备一个本地静态测试页夹具，故意埋一个可见渲染 bug（如溢出容器的文字），验证 agent 端到端能够识别出来——这也是作品集 demo 的核心演示素材。
 
+## MVP 范围（第一轮实施）
+
+**包含**：Agent Loop、Playwright 工具层基础版（navigate/click/fill/screenshot/wait_for）、视觉回注层（manifest 驱动 + 幂等去重）、资源护栏、不可信数据隔离、`llm_judge.py` 纯 LLM 判断模式、CLI + Markdown 输出。
+
+**推迟到下一轮迭代**：`diff_judge.py`（像素 diff 模式，阈值调优需要真实截图数据，MVP 阶段不具备条件）、复杂自然语言元素定位的歧义处理（MVP 假设测试页面结构相对简单）、Web 仪表盘（spec 一开始就列为 stretch goal）。
+
+判断层因此在 MVP 阶段先只接 `llm_judge.py` 一种实现，但第 4 节的统一接口设计保留，为后续接入 `diff_judge.py` 留好扩展点。
+
 ## 待实施阶段细化的开放问题
 
 以下问题不影响本设计的整体方向，留到写实施计划/编码阶段具体定：
